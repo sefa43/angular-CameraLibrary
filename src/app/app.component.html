@@ -302,6 +302,70 @@
   }
 </style>
 
+<h1>Dynamsoft Camera SDK: Hello World</h1>
+    <select size="1" id="source" width="220px" onchange="onSourceChanged()"></select>
+    <input type="button" value="Capture" onclick="onCapture();" />
+
+    <div id="video-container"> </div>
+    <div id="image-container"> </div>
+
+    <script type="text/javascript" src="https://www.dynamsoft.com/library/dcs/dynamsoft.camera.min.js">
+    </script>
+    <script>
+        var dcsObject, imageViewer;
+        var width = 480,
+            height = 320;
+
+        function onInitSuccess(videoViewerId, imageViewerId) {
+            dcsObject = dynamsoft.dcsEnv.getObject(videoViewerId); // Get the Dynamsoft Webcam object
+            dcsObject.videoviewer.setWidth(width);
+            dcsObject.videoviewer.setHeight(height);
+            imageViewer = dcsObject.getImageViewer(imageViewerId); // Get a specific image viewer
+            imageViewer.ui.setWidth(width);
+            imageViewer.ui.setHeight(height);
+            var cameraList = dcsObject.camera.getCameraList(); // Get a list of available cameras
+            for (var i = 0; i < cameraList.length; i++) {
+                document.getElementById("source").options.add(new Option(cameraList[i], i));
+            }
+
+            if (cameraList.length > 0) {
+                // Call this method to take the ownership, 
+                // in case the listed camera is occupied by another Dynamsoft Webcam process.
+                dcsObject.camera.takeCameraOwnership(cameraList[0]);
+                dcsObject.camera.playVideo();
+            } else {
+                alert('No camera is connected.');
+            }
+        }
+
+        function onInitFailure(errorCode, errorString) {
+            alert('Init failed: ' + errorString);
+        };
+
+        function onSourceChanged() {
+            if (!dcsObject) return;
+            var source = document.getElementById("source");
+            var camera = source.options[source.selectedIndex].text;
+            dcsObject.camera.takeCameraOwnership(camera);
+            dcsObject.camera.playVideo();
+        };
+
+        function onCapture() {
+            if (!dcsObject) return;
+            dcsObject.camera.captureImage('image-container');
+            if (dcsObject.getErrorCode() !== EnumDWS_ErrorCode.OK) {
+                alert('Capture error: ' + dcsObject.getErrorString());
+            }
+        };
+
+        // Initialize Dynamsoft Webcam object
+        dynamsoft.dcsEnv.init('video-container', 'image-container', onInitSuccess, onInitFailure);
+        // Destroy Dynamsoft Webcam object when the page is closed
+        window.onbeforeunload = function() {
+            if (dcsObject) dcsObject.destroy();
+        };
+    </script>
+
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
   <img
