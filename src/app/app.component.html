@@ -284,7 +284,7 @@
       transform: rotate(-5deg);
     }
   }
-  
+
   @media screen and (max-width: 575px) {
     svg#rocket-smoke {
       display: none;
@@ -293,7 +293,11 @@
   }
 </style>
 
-<h1>Dynamsoft Camera SDK: Hello World</h1>
+<div class="container">
+  
+<app-header></app-header>
+
+<h1>Welcome to CamLibrary: Hello!</h1>
     <select size="5" id="source" width="220px" onchange="onSourceChanged()"></select>
     <input type="button" value="Capture" onclick="onCapture();" />
 
@@ -356,4 +360,6 @@
             if (dcsObject) dcsObject.destroy();
         };
     </script>
+
+</div>
 
