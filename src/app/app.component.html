@@ -1,9 +1,12 @@
-<div class="bg">
-
 <app-navbar></app-navbar>
 
+
+<div class="bg">
+
+<router-outlet class="router"></router-outlet>
+
 <div>
-  <button class="btn1" (click)="checkPermissions()">Allow Webcam Access</button>
+  <button class="btn1" (click)="checkPermissions()">Connect webcam</button>
   <p class="status">Status: {{status}}</p>
 </div>
 
@@ -15,7 +18,11 @@
 <!--Preview Image-->
 <div *ngIf="previewImage">
   <img class="imgpreview" src="previewImage" height="250" width = "250">
-  <button (click)="proceed()">Proceed</button>
+  <button (click)="proceed()">Image Taken!</button>
 </div>
 
+
+
 </div>
+
+
