@@ -39,7 +39,7 @@ export class AppComponent {
     }).catch(err =>{
       console.log(err);
       if(err?.message === 'Permission denied') {
-        this.status = 'Permission denied please try again'
+        this.status = 'Permission denied, please try again'
       } else {
         this.status = 'No camera detected, please try again'
       }

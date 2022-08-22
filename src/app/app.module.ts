@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { WebcamModule } from 'ngx-webcam';
 import {RouterModule, Routes } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { RegisterUserComponent } from './register-user/register-user.component';
 
 const routes: Routes = [
   {path:'home', component: HomeComponent},
@@ -25,10 +25,10 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HeaderComponent,
-
     NavbarComponent,
     AboutComponent,
     ContactComponent,
+    RegisterUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +37,7 @@ const routes: Routes = [
     BrowserAnimationsModule, 
     MatToolbarModule, 
     MatButtonModule, 
-    MatIconModule
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
