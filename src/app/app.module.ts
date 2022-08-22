@@ -25,7 +25,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HeaderComponent,
-    
+
     NavbarComponent,
     AboutComponent,
     ContactComponent,
